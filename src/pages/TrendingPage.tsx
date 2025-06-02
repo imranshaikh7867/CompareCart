@@ -99,7 +99,7 @@ const TrendingPage: React.FC = () => {
                   </div>
                   
                   <Link 
-                    to={`/comparison/${comparison.id}`} 
+                    to={``} 
                     className="text-center bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors duration-200 font-medium flex items-center justify-center"
                   >
                     Buy on Amazon <ArrowRight className="ml-1 h-4 w-4" />

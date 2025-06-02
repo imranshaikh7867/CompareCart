@@ -40,7 +40,7 @@ const TrendingComparisons: React.FC = () => {
           Trending Comparisons
         </h2>
         <Link
-          to="/trending"
+          to="/CompareCart/trending"
           className="text-blue-600 hover:text-blue-800 font-medium flex items-center"
         >
           View All

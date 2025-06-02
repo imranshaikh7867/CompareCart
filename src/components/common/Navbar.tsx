@@ -14,7 +14,7 @@ const Navbar: React.FC = () => {
     e.preventDefault();
     if (searchQuery.trim()) {
       searchProducts(searchQuery);
-      navigate('/search-results');
+      navigate('/CompareCart/search-results');
       setSearchQuery('');
     }
   };
@@ -24,7 +24,7 @@ const Navbar: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <div className="flex-shrink-0 flex items-center">
-            <Link to="/" className="flex items-center">
+            <Link to="/CompareCart" className="flex items-center">
               <ShoppingCart className="h-8 w-8 text-blue-600" />
               <span className="ml-2 text-xl font-bold text-gray-900">CompareCart</span>
             </Link>
@@ -53,13 +53,13 @@ const Navbar: React.FC = () => {
           
           {/* Desktop navigation */}
           <div className="hidden md:flex items-center space-x-6">
-            <Link to="/" className="text-gray-700 hover:text-blue-600 transition duration-200">
+            <Link to="/CompareCart" className="text-gray-700 hover:text-blue-600 transition duration-200">
               Home
             </Link>
-            <Link to="/trending" className="text-gray-700 hover:text-blue-600 transition duration-200">
+            <Link to="/CompareCart/trending" className="text-gray-700 hover:text-blue-600 transition duration-200">
               Trending
             </Link>
-            <Link to="/categories" className="text-gray-700 hover:text-blue-600 transition duration-200">
+            <Link to="/CompareCart/categories" className="text-gray-700 hover:text-blue-600 transition duration-200">
               Categories
             </Link>
           </div>
@@ -103,21 +103,21 @@ const Navbar: React.FC = () => {
             </form>
             
             <Link
-              to="/"
+              to="/CompareCart"
               className="block py-2 px-3 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50"
               onClick={() => setIsMenuOpen(false)}
             >
               Home
             </Link>
             <Link
-              to="/trending"
+              to="/CompareCart/trending"
               className="block py-2 px-3 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50"
               onClick={() => setIsMenuOpen(false)}
             >
               Trending
             </Link>
             <Link
-              to="/categories"
+              to="/CompareCart/categories"
               className="block py-2 px-3 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50"
               onClick={() => setIsMenuOpen(false)}
             >

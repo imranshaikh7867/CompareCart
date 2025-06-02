@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ShoppingCart, Mail, Instagram, Twitter, Facebook, Github } from 'lucide-react';
+import { ShoppingCart, Instagram, Twitter, Facebook, Github } from 'lucide-react';
 
 const Footer: React.FC = () => {
   return (
@@ -36,7 +36,7 @@ const Footer: React.FC = () => {
             <ul className="mt-4 space-y-2">
               {['Smartphones', 'Laptops', 'Headphones', 'Cameras', 'TVs'].map((item) => (
                 <li key={item}>
-                  <Link to={`/categories?category=${item.toLowerCase()}`} className="text-gray-400 hover:text-blue-400 transition-colors duration-200">
+                  <Link to={`/CompareCart/categories?category=${item.toLowerCase()}`} className="text-gray-400 hover:text-blue-400 transition-colors duration-200">
                     {item}
                   </Link>
                 </li>

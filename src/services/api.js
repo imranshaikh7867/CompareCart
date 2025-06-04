@@ -1,7 +1,5 @@
-import { Product, ComparisonItem } from '../types';
-
 // Mock data for Amazon products
-const amazonProducts: Product[] = [
+const amazonProducts = [
   {
     id: 'a1',
     name: 'Apple iPhone 14 Pro (128GB)',
@@ -57,7 +55,7 @@ const amazonProducts: Product[] = [
 ];
 
 // Mock data for Flipkart products
-const flipkartProducts: Product[] = [
+const flipkartProducts = [
   {
     id: 'f1',
     name: 'Apple iPhone 14 Pro (128GB)',
@@ -113,7 +111,7 @@ const flipkartProducts: Product[] = [
 ];
 
 // Mock trending comparisons
-const mockTrendingComparisons: ComparisonItem[] = [
+const mockTrendingComparisons = [
   {
     id: 'comp-1',
     amazonProduct: amazonProducts[0],
@@ -149,10 +147,10 @@ const mockTrendingComparisons: ComparisonItem[] = [
 ];
 
 // Simulate API delay
-const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
 // Search products function (mock API call)
-export const searchProducts = async (term: string): Promise<Product[]> => {
+export const searchProducts = async (term) => {
   await delay(800); // Simulate network delay
   
   const normalizedTerm = term.toLowerCase();
@@ -167,13 +165,13 @@ export const searchProducts = async (term: string): Promise<Product[]> => {
 };
 
 // Get trending comparisons
-export const fetchTrendingComparisons = async (): Promise<ComparisonItem[]> => {
+export const fetchTrendingComparisons = async () => {
   await delay(600); // Simulate network delay
   return mockTrendingComparisons;
 };
 
 // Get product recommendations (mock API call)
-export const getRecommendations = async (productId: string): Promise<Product[]> => {
+export const getRecommendations = async (productId) => {
   await delay(700); // Simulate network delay
   
   // Return 3 random products as recommendations
@@ -183,7 +181,7 @@ export const getRecommendations = async (productId: string): Promise<Product[]> 
 };
 
 // Get product details by ID
-export const getProductById = async (id: string, platform: 'amazon' | 'flipkart'): Promise<Product | undefined> => {
+export const getProductById = async (id, platform) => {
   await delay(300); // Simulate network delay
   
   const products = platform === 'amazon' ? amazonProducts : flipkartProducts;
@@ -191,12 +189,12 @@ export const getProductById = async (id: string, platform: 'amazon' | 'flipkart'
 };
 
 // Get comparison by ID
-export const getComparisonById = async (id: string): Promise<ComparisonItem | undefined> => {
+export const getComparisonById = async (id) => {
   await delay(500); // Simulate network delay
   return mockTrendingComparisons.find(comp => comp.id === id);
 };
 
-export const getAllProducts = async (): Promise<Product[]> => {
+export const getAllProducts = async () => {
   await delay(500);
   return [...amazonProducts, ...flipkartProducts];
-};
+}; 

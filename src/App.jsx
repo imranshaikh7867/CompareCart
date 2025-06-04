@@ -4,14 +4,11 @@ import Navbar from './components/common/Navbar';
 import Footer from './components/common/Footer';
 import HomePage from './pages/HomePage';
 import SearchResultsPage from './pages/SearchResultsPage';
-import ComparisonPage from './pages/ComparisonPage';
 import TrendingPage from './pages/TrendingPage';
 import CategoryPage from './pages/CategoryPage';
-import { useProductStore } from './store/useProductStore';
 
 function App() {
   // Initialize store
-  const store = useProductStore();
 
   return (
     <Router>
@@ -21,7 +18,6 @@ function App() {
           <Routes>
             <Route path="/CompareCart" element={<HomePage />} />
             <Route path="/CompareCart/search-results" element={<SearchResultsPage />} />
-            <Route path="/CompareCart/comparison/:id" element={<ComparisonPage />} />
             <Route path="/CompareCart/trending" element={<TrendingPage />} />
             <Route path="/CompareCart/categories" element={<CategoryPage />} />
           </Routes>
@@ -32,4 +28,4 @@ function App() {
   );
 }
 
-export default App;
+export default App; 

@@ -1,35 +1,13 @@
 import { create } from 'zustand';
-import { Product, ComparisonItem, FilterOptions, SortOption } from '../types';
 import { fetchTrendingComparisons, searchProducts } from '../services/api';
 
-interface ProductState {
-  products: Product[];
-  searchResults: Product[];
-  comparisons: ComparisonItem[];
-  trendingComparisons: ComparisonItem[];
-  currentComparison: ComparisonItem | null;
-  isLoading: boolean;
-  searchTerm: string;
-  filterOptions: FilterOptions;
-  sortOption: SortOption;
-  
-  // Actions
-  setSearchTerm: (term: string) => void;
-  setFilterOptions: (options: Partial<FilterOptions>) => void;
-  setSortOption: (option: SortOption) => void;
-  searchProducts: (term: string) => Promise<void>;
-  fetchTrendingComparisons: () => Promise<void>;
-  compareProducts: (amazonProductId: string, flipkartProductId: string) => void;
-  setCurrentComparison: (comparison: ComparisonItem) => void;
-}
-
-const defaultFilterOptions: FilterOptions = {
+const defaultFilterOptions = {
   priceRange: [0, 100000],
   minRating: 0,
   platforms: ['amazon', 'flipkart']
 };
 
-export const useProductStore = create<ProductState>((set, get) => ({
+export const useProductStore = create((set, get) => ({
   products: [],
   searchResults: [],
   comparisons: [],
@@ -76,7 +54,7 @@ export const useProductStore = create<ProductState>((set, get) => ({
     const flipkartProduct = products.find(p => p.id === flipkartProductId && p.platform === 'flipkart');
     
     if (amazonProduct || flipkartProduct) {
-      const newComparison: ComparisonItem = {
+      const newComparison = {
         id: `${amazonProductId || 'none'}-${flipkartProductId || 'none'}`,
         amazonProduct,
         flipkartProduct,
@@ -93,4 +71,4 @@ export const useProductStore = create<ProductState>((set, get) => ({
   },
   
   setCurrentComparison: (comparison) => set({ currentComparison: comparison })
-}));
+})); 

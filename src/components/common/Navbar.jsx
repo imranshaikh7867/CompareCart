@@ -1,21 +1,21 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Search, Menu, X, ShoppingCart } from 'lucide-react';
 import { useProductStore } from '../../store/useProductStore';
-import { useNavigate } from 'react-router-dom';
 
-const Navbar: React.FC = () => {
+const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const { searchProducts } = useProductStore();
   const navigate = useNavigate();
 
-  const handleSearch = (e: React.FormEvent) => {
+  const handleSearch = (e) => {
     e.preventDefault();
     if (searchQuery.trim()) {
-      searchProducts(searchQuery);
-      navigate('/CompareCart/search-results');
+      searchProducts(searchQuery.trim());
+      navigate(`/CompareCart/search-results?q=${encodeURIComponent(searchQuery.trim())}`);
       setSearchQuery('');
+      setIsMenuOpen(false);
     }
   };
 
@@ -43,25 +43,12 @@ const Navbar: React.FC = () => {
                 />
                 <button
                   type="submit"
-                  className="absolute inset-y-0 right-0 flex items-center px-3 bg-blue-600 rounded-r-lg text-white"
+                  className="absolute inset-y-0 right-0 flex items-center px-3 bg-blue-600 rounded-r-lg text-white hover:bg-blue-700 transition-colors"
                 >
                   <Search className="h-5 w-5" />
                 </button>
               </div>
             </form>
-          </div>
-          
-          {/* Desktop navigation */}
-          <div className="hidden md:flex items-center space-x-6">
-            <Link to="/CompareCart" className="text-gray-700 hover:text-blue-600 transition duration-200">
-              Home
-            </Link>
-            <Link to="/CompareCart/trending" className="text-gray-700 hover:text-blue-600 transition duration-200">
-              Trending
-            </Link>
-            <Link to="/CompareCart/categories" className="text-gray-700 hover:text-blue-600 transition duration-200">
-              Categories
-            </Link>
           </div>
           
           {/* Mobile menu button */}
@@ -80,7 +67,7 @@ const Navbar: React.FC = () => {
         </div>
       </div>
       
-      {/* Mobile menu, show/hide based on menu state */}
+      {/* Mobile menu */}
       {isMenuOpen && (
         <div className="md:hidden">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
@@ -95,34 +82,14 @@ const Navbar: React.FC = () => {
                 />
                 <button
                   type="submit"
-                  className="absolute inset-y-0 right-0 flex items-center px-3 bg-blue-600 rounded-r-lg text-white"
+                  className="absolute inset-y-0 right-0 flex items-center px-3 bg-blue-600 rounded-r-lg text-white hover:bg-blue-700 transition-colors"
                 >
                   <Search className="h-5 w-5" />
                 </button>
               </div>
             </form>
             
-            <Link
-              to="/CompareCart"
-              className="block py-2 px-3 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Home
-            </Link>
-            <Link
-              to="/CompareCart/trending"
-              className="block py-2 px-3 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Trending
-            </Link>
-            <Link
-              to="/CompareCart/categories"
-              className="block py-2 px-3 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Categories
-            </Link>
+            
           </div>
         </div>
       )}

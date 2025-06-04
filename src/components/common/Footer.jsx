@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { ShoppingCart, Instagram, Twitter, Facebook, Github } from 'lucide-react';
 
-const Footer: React.FC = () => {
+const Footer = () => {
   return (
     <footer className="bg-gray-900 text-white">
       <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
@@ -34,7 +34,7 @@ const Footer: React.FC = () => {
           <div>
             <h3 className="text-sm font-semibold text-gray-300 tracking-wider uppercase">Categories</h3>
             <ul className="mt-4 space-y-2">
-              {['Smartphones', 'Laptops', 'Headphones', 'Cameras', 'TVs'].map((item) => (
+              {["Smartphones", "Laptops", "Headphones", "Cameras", "TVs"].map((item) => (
                 <li key={item}>
                   <Link to={`/CompareCart/categories?category=${item.toLowerCase()}`} className="text-gray-400 hover:text-blue-400 transition-colors duration-200">
                     {item}
@@ -47,7 +47,7 @@ const Footer: React.FC = () => {
           <div>
             <h3 className="text-sm font-semibold text-gray-300 tracking-wider uppercase">Company</h3>
             <ul className="mt-4 space-y-2">
-              {['About', 'How it Works', 'Blog', 'Careers', 'Press'].map((item) => (
+              {["About", "How it Works", "Blog", "Careers", "Press"].map((item) => (
                 <li key={item}>
                   <a href="#" className="text-gray-400 hover:text-blue-400 transition-colors duration-200">
                     {item}
@@ -60,7 +60,7 @@ const Footer: React.FC = () => {
           <div>
             <h3 className="text-sm font-semibold text-gray-300 tracking-wider uppercase">Legal</h3>
             <ul className="mt-4 space-y-2">
-              {['Terms', 'Privacy', 'Cookies', 'Affiliate Disclosure', 'Contact'].map((item) => (
+              {["Terms", "Privacy", "Cookies", "Affiliate Disclosure", "Contact"].map((item) => (
                 <li key={item}>
                   <a href="#" className="text-gray-400 hover:text-blue-400 transition-colors duration-200">
                     {item}

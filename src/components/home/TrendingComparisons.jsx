@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { ArrowRight, ChevronRight, TrendingUp } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import ProductCard from '../common/ProductCard';
+import { backend_url } from '../../constants/constant';
 
 const TrendingComparisons = () => {
   const [products, setProducts] = useState([]);
@@ -9,7 +10,7 @@ const TrendingComparisons = () => {
 
   const getAllProducts = async () => {
     try {
-      const response = await fetch('http://localhost:4080/api/v1/product', {
+      const response = await fetch(`${backend_url}/api/v1/product`, {
         method: 'GET',
       });
 
@@ -71,18 +72,27 @@ const TrendingComparisons = () => {
   }
   const calculateBestDeal = (priceVsPlatform) => {
     if (!priceVsPlatform || priceVsPlatform.length === 0) return null;
+    
+    // Convert price strings to numbers, handling comma-separated values
+    const platformsWithNumericPrices = priceVsPlatform.map(platform => ({
+      ...platform,
+      price: typeof platform.price === 'string' 
+        ? parseFloat(platform.price.replace(/,/g, ''))
+        : platform.price
+    }));
 
-    const sortedPlatforms = [...priceVsPlatform].sort((a, b) => a.price - b.price);
+    const sortedPlatforms = [...platformsWithNumericPrices].sort((a, b) => a.price - b.price);
     const lowestPrice = sortedPlatforms[0].price;
     const highestPrice = sortedPlatforms[sortedPlatforms.length - 1].price;
     const savings = ((highestPrice - lowestPrice) / highestPrice * 100).toFixed(0);
-
+    
     return {
       platform: sortedPlatforms[0].platform,
       link: sortedPlatforms[0].link,
       savings: savings
     };
   };
+
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <div className="flex justify-between items-center mb-6">
@@ -91,7 +101,7 @@ const TrendingComparisons = () => {
           All Products
         </h2>
         <Link
-          to="/CompareCart/trending"
+          to="/trending"
           className="text-blue-600 hover:text-blue-800 font-medium flex items-center"
         >
           View All
@@ -100,7 +110,7 @@ const TrendingComparisons = () => {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        {products.map(product => {
+        {products.slice(0, 4).map(product => {
           const bestDeal = calculateBestDeal(product.price_vs_platform);
 
           return (

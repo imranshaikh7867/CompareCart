@@ -13,7 +13,7 @@ const Navbar = () => {
     e.preventDefault();
     if (searchQuery.trim()) {
       searchProducts(searchQuery.trim());
-      navigate(`/CompareCart/search-results?q=${encodeURIComponent(searchQuery.trim())}`);
+      navigate(`/search-results?q=${encodeURIComponent(searchQuery.trim())}`);
       setSearchQuery('');
       setIsMenuOpen(false);
     }
@@ -24,9 +24,9 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <div className="flex-shrink-0 flex items-center">
-            <Link to="/CompareCart" className="flex items-center">
+            <Link to="/" className="flex items-center">
               <ShoppingCart className="h-8 w-8 text-blue-600" />
-              <span className="ml-2 text-xl font-bold text-gray-900">CompareCart</span>
+              <span className="ml-2 text-xl font-bold text-gray-900">CompareKar</span>
             </Link>
           </div>
           

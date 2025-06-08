@@ -10,7 +10,7 @@ const Footer = () => {
           <div className="col-span-1 md:col-span-1">
             <div className="flex items-center">
               <ShoppingCart className="h-8 w-8 text-blue-400" />
-              <span className="ml-2 text-xl font-bold">CompareCart</span>
+              <span className="ml-2 text-xl font-bold">CompareKar</span>
             </div>
             <p className="mt-2 text-sm text-gray-400">
               Making shopping decisions easier with comprehensive product comparisons.
@@ -34,9 +34,9 @@ const Footer = () => {
           <div>
             <h3 className="text-sm font-semibold text-gray-300 tracking-wider uppercase">Categories</h3>
             <ul className="mt-4 space-y-2">
-              {["Smartphones", "Laptops", "Headphones", "Cameras", "TVs"].map((item) => (
+              {["Shoe for Men", "Shoe for Women", "Shoe for Men (Casual)", "Shoe for Men (Formal)", "Shoe for Men (Leather)"].map((item) => (
                 <li key={item}>
-                  <Link to={`/CompareCart/categories?category=${item.toLowerCase()}`} className="text-gray-400 hover:text-blue-400 transition-colors duration-200">
+                  <Link to={`/categories?category=${item.toLowerCase()}`} className="text-gray-400 hover:text-blue-400 transition-colors duration-200">
                     {item}
                   </Link>
                 </li>
@@ -73,11 +73,11 @@ const Footer = () => {
         
         <div className="mt-12 pt-8 border-t border-gray-700">
           <p className="text-base text-gray-400 text-center">
-            &copy; {new Date().getFullYear()} CompareCart. All rights reserved.
+            &copy; {new Date().getFullYear()} CompareKar. All rights reserved.
           </p>
           <p className="mt-2 text-sm text-gray-500 text-center">
             Amazon and Flipkart are trademarks of Amazon.com, Inc. and Flipkart Private Limited respectively.
-            CompareCart is not affiliated with either company.
+            CompareKar is not affiliated with either company.
           </p>
         </div>
       </div>

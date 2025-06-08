@@ -5,18 +5,27 @@ import ProductCard from '../common/ProductCard';
 const SearchResults = ({ products, isLoading, searchTerm }) => {
   const calculateBestDeal = (priceVsPlatform) => {
     if (!priceVsPlatform || priceVsPlatform.length === 0) return null;
+    
+    // Convert price strings to numbers, handling comma-separated values
+    const platformsWithNumericPrices = priceVsPlatform.map(platform => ({
+      ...platform,
+      price: typeof platform.price === 'string' 
+        ? parseFloat(platform.price.replace(/,/g, ''))
+        : platform.price
+    }));
 
-    const sortedPlatforms = [...priceVsPlatform].sort((a, b) => a.price - b.price);
+    const sortedPlatforms = [...platformsWithNumericPrices].sort((a, b) => a.price - b.price);
     const lowestPrice = sortedPlatforms[0].price;
     const highestPrice = sortedPlatforms[sortedPlatforms.length - 1].price;
     const savings = ((highestPrice - lowestPrice) / highestPrice * 100).toFixed(0);
-
+    
     return {
       platform: sortedPlatforms[0].platform,
       link: sortedPlatforms[0].link,
       savings: savings
     };
   };
+
 
   if (isLoading) {
     return (

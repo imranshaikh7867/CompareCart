@@ -16,10 +16,10 @@ function App() {
         <Navbar />
         <main className="flex-grow">
           <Routes>
-            <Route path="/CompareCart" element={<HomePage />} />
-            <Route path="/CompareCart/search-results" element={<SearchResultsPage />} />
-            <Route path="/CompareCart/trending" element={<TrendingPage />} />
-            <Route path="/CompareCart/categories" element={<CategoryPage />} />
+            <Route path="/" element={<HomePage />} />
+            <Route path="/search-results" element={<SearchResultsPage />} />
+            <Route path="/trending" element={<TrendingPage />} />
+            <Route path="/categories" element={<CategoryPage />} />
           </Routes>
         </main>
         <Footer />

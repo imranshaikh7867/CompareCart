@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { LayoutGrid, Filter, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { backend_url } from '../constants/constant';
 
 const categories = [
   { id: 'Smartphones', name: 'Smartphones', icon: '📱' },
@@ -24,7 +25,7 @@ function CategoryPage() {
 
   const getAllProducts = async () => {
     try {
-      const response = await fetch('http://localhost:4080/api/v1/product', {
+      const response = await fetch(`${backend_url}/api/v1/product`, {
         method: 'GET',
       });
 
@@ -48,7 +49,7 @@ function CategoryPage() {
 
   const getProductByCategory = async (category) => {
     try {
-      const response = await fetch(`http://localhost:4080/api/v1/product/category/${category}`, {
+      const response = await fetch(`${backend_url}/api/v1/product/category/${category}`, {
         method: 'GET',
       });
 
@@ -95,13 +96,22 @@ function CategoryPage() {
   const calculateBestDeal = (priceVsPlatform) => {
     if (!priceVsPlatform || priceVsPlatform.length === 0) return null;
     
-    const sortedPlatforms = [...priceVsPlatform].sort((a, b) => a.price - b.price);
+    // Convert price strings to numbers, handling comma-separated values
+    const platformsWithNumericPrices = priceVsPlatform.map(platform => ({
+      ...platform,
+      price: typeof platform.price === 'string' 
+        ? parseFloat(platform.price.replace(/,/g, ''))
+        : platform.price
+    }));
+
+    const sortedPlatforms = [...platformsWithNumericPrices].sort((a, b) => a.price - b.price);
     const lowestPrice = sortedPlatforms[0].price;
     const highestPrice = sortedPlatforms[sortedPlatforms.length - 1].price;
     const savings = ((highestPrice - lowestPrice) / highestPrice * 100).toFixed(0);
     
     return {
       platform: sortedPlatforms[0].platform,
+      link: sortedPlatforms[0].link,
       savings: savings
     };
   };

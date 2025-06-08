@@ -5,15 +5,14 @@ import { Lightbulb, BarChart3, Zap } from 'lucide-react';
 import HeroSection from '../components/home/HeroSection';
 import TrendingComparisons from '../components/home/TrendingComparisons';
 import ProductCard from '../components/common/ProductCard';
+import { backend_url } from '../constants/constant';
 
 const categories = [
-  { id: 'Smartphones', name: 'Smartphones', icon: '📱' },
-  { id: 'Laptops', name: 'Laptops', icon: '💻' },
-  { id: 'Headphones', name: 'Headphones', icon: '🎧' },
-  { id: 'Cameras', name: 'Cameras', icon: '📷' },
-  { id: 'TVs', name: 'TVs', icon: '📺' },
-  { id: 'Smart Watches', name: 'Smart Watches', icon: '⌚' },
-  { id: 'Tablets', name: 'Tablets', icon: '📱' },
+  { id: 'Shoe for Men', name: 'Shoe for Men', icon: '📱' },
+  { id: 'Shoe for Women', name: 'Shoe for Women', icon: '💻' },
+  { id: 'Shoe for Men (Casual)', name: 'Shoe for Men (Casual)', icon: '🎧' },
+  { id: 'Shoe for Men (Formal)', name: 'Shoe for Men (Formal)', icon: '📷' },
+  { id: 'Shoe for Men (Leather)', name: 'Shoe for Men (Leather)', icon: '📺' },
 ];
 
 const HomePage = () => {
@@ -27,7 +26,7 @@ const HomePage = () => {
 
   const getAllProducts = async () => {
     try {
-      const response = await fetch('http://localhost:4080/api/v1/product', {
+      const response = await fetch(`${backend_url}/api/v1/product`, {
         method: 'GET',
       });
 
@@ -51,7 +50,7 @@ const HomePage = () => {
 
   const getProductByCategory = async (category) => {
     try {
-      const response = await fetch(`http://localhost:4080/api/v1/product/category/${category}`, {
+      const response = await fetch(`${backend_url}/api/v1/product/category/${category}`, {
         method: 'GET',
       });
 
@@ -97,18 +96,27 @@ const HomePage = () => {
 
   const calculateBestDeal = (priceVsPlatform) => {
     if (!priceVsPlatform || priceVsPlatform.length === 0) return null;
+    
+    // Convert price strings to numbers, handling comma-separated values
+    const platformsWithNumericPrices = priceVsPlatform.map(platform => ({
+      ...platform,
+      price: typeof platform.price === 'string' 
+        ? parseFloat(platform.price.replace(/,/g, ''))
+        : platform.price
+    }));
 
-    const sortedPlatforms = [...priceVsPlatform].sort((a, b) => a.price - b.price);
+    const sortedPlatforms = [...platformsWithNumericPrices].sort((a, b) => a.price - b.price);
     const lowestPrice = sortedPlatforms[0].price;
     const highestPrice = sortedPlatforms[sortedPlatforms.length - 1].price;
     const savings = ((highestPrice - lowestPrice) / highestPrice * 100).toFixed(0);
-
+    
     return {
       platform: sortedPlatforms[0].platform,
       link: sortedPlatforms[0].link,
       savings: savings
     };
   };
+
 
   return (
     <div className='bg-gray-50'>
@@ -143,7 +151,7 @@ const HomePage = () => {
                     : 'bg-white border-gray-200 text-gray-700 hover:bg-gray-50'
                   }`}
               >
-                <span className="text-2xl mb-1">{category.icon}</span>
+                {/* <span className="text-2xl mb-1">{category.icon}</span> */}
                 <span className="text-sm font-medium">{category.name}</span>
               </button>
             ))}

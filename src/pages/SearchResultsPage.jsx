@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import SearchFilters from '../components/search/SearchFilters';
 import SearchResults from '../components/search/SearchResults';
+import { backend_url } from '../constants/constant';
 
 const SearchResultsPage = () => {
   const [searchParams] = useSearchParams();
@@ -13,7 +14,7 @@ const SearchResultsPage = () => {
 
   const getAllProducts = async () => {
     try {
-      const response = await fetch('http://localhost:4080/api/v1/product', {
+      const response = await fetch(`${backend_url}/api/v1/product`, {
         method: 'GET',
       });
 
@@ -37,7 +38,7 @@ const SearchResultsPage = () => {
 
   const getProductByCategory = async (category) => {
     try {
-      const response = await fetch(`http://localhost:4080/api/v1/product/category/${category}`, {
+      const response = await fetch(`${backend_url}/api/v1/product/category/${category}`, {
         method: 'GET',
       });
 

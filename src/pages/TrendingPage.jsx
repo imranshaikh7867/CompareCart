@@ -3,6 +3,7 @@ import { useProductStore } from '../store/useProductStore';
 import { TrendingUp, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import ProductCard from '../components/common/ProductCard';
+import { backend_url } from '../constants/constant';
 
 const TrendingPage = () => {
   const [products, setProducts] = useState([]);
@@ -10,7 +11,7 @@ const TrendingPage = () => {
 
   const getAllProducts = async () => {
     try {
-      const response = await fetch('http://localhost:4080/api/v1/product', {
+      const response = await fetch(`${backend_url}/api/v1/product`, {
         method: 'GET',
       });
 
@@ -74,7 +75,15 @@ const TrendingPage = () => {
   const calculateBestDeal = (priceVsPlatform) => {
     if (!priceVsPlatform || priceVsPlatform.length === 0) return null;
 
-    const sortedPlatforms = [...priceVsPlatform].sort((a, b) => a.price - b.price);
+    // Convert price strings to numbers, handling comma-separated values
+    const platformsWithNumericPrices = priceVsPlatform.map(platform => ({
+      ...platform,
+      price: typeof platform.price === 'string'
+        ? parseFloat(platform.price.replace(/,/g, ''))
+        : platform.price
+    }));
+
+    const sortedPlatforms = [...platformsWithNumericPrices].sort((a, b) => a.price - b.price);
     const lowestPrice = sortedPlatforms[0].price;
     const highestPrice = sortedPlatforms[sortedPlatforms.length - 1].price;
     const savings = ((highestPrice - lowestPrice) / highestPrice * 100).toFixed(0);
@@ -85,6 +94,7 @@ const TrendingPage = () => {
       savings: savings
     };
   };
+
 
   return (
     <div className="bg-gray-50 min-h-screen">

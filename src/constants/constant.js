@@ -1,0 +1,1 @@
+export const backend_url = "https://compare-cart-admin-panel-backend-2.onrender.com";

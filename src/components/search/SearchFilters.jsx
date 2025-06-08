@@ -2,17 +2,15 @@ import React from 'react';
 import { Filter } from 'lucide-react';
 
 const categories = [
-  { id: 'Smartphones', name: 'Smartphones', icon: '📱' },
-  { id: 'Laptops', name: 'Laptops', icon: '💻' },
-  { id: 'Headphones', name: 'Headphones', icon: '🎧' },
-  { id: 'Cameras', name: 'Cameras', icon: '📷' },
-  { id: 'TVs', name: 'TVs', icon: '📺' },
-  { id: 'Smart Watches', name: 'Smart Watches', icon: '⌚' },
-  { id: 'Tablets', name: 'Tablets', icon: '📱' },
+  { id: 'Shoe for Men', name: 'Shoe for Men', icon: '📱' },
+  { id: 'Shoe for Women', name: 'Shoe for Women', icon: '💻' },
+  { id: 'Shoe for Men (Casual)', name: 'Shoe for Men (Casual)', icon: '🎧' },
+  { id: 'Shoe for Men (Formal)', name: 'Shoe for Men (Formal)', icon: '📷' },
+  { id: 'Shoe for Men (Leather)', name: 'Shoe for Men (Leather)', icon: '📺' },
 ];
 
 const SearchFilters = ({ selectedCategory, onCategoryChange, priceRange, onPriceRangeChange }) => {
-    
+
 
   return (
     <div className="bg-white rounded-lg shadow-md p-4">
@@ -27,11 +25,10 @@ const SearchFilters = ({ selectedCategory, onCategoryChange, priceRange, onPrice
         <div className="space-y-2">
           <button
             onClick={() => onCategoryChange('all')}
-            className={`w-full flex items-center p-2 rounded-md transition-colors ${
-              selectedCategory === 'all'
+            className={`w-full flex items-center p-2 rounded-md transition-colors ${selectedCategory === 'all'
                 ? 'bg-blue-50 text-blue-700'
                 : 'text-gray-700 hover:bg-gray-50'
-            }`}
+              }`}
           >
             <span className="text-lg mr-2">🔍</span>
             <span>All Categories</span>
@@ -40,18 +37,16 @@ const SearchFilters = ({ selectedCategory, onCategoryChange, priceRange, onPrice
             <button
               key={category.id}
               onClick={() => onCategoryChange(category.id)}
-              className={`w-full flex items-center p-2 rounded-md transition-colors ${
-                selectedCategory === category.id
+              className={`w-full flex items-center p-2 rounded-md transition-colors ${selectedCategory === category.id
                   ? 'bg-blue-50 text-blue-700'
                   : 'text-gray-700 hover:bg-gray-50'
-              }`}
+                }`}
             >
-              <span className="text-lg mr-2">{category.icon}</span>
               <span>{category.name}</span>
             </button>
           ))}
         </div>
-      </div>      
+      </div>
     </div>
   );
 };

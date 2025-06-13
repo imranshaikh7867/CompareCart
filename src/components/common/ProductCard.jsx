@@ -12,7 +12,7 @@ function ProductCard({ product, bestDeal }) {
                 <img
                     src={product.image}
                     alt={product.name}
-                    className="w-full h-60 object-fill"
+                    className="w-full object-fill"
                 />
                 <div className="absolute top-2 right-2 bg-white/90 rounded-full px-2 py-1 text-xs font-semibold text-gray-800">
                     {product.category}

@@ -5,10 +5,10 @@
   "version": "0.1.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "node api.js && vite",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
-    "build": "vite build",
+    "build": "node api.js && vite build",
     "lint": "eslint .",
     "preview": "vite preview"
   },

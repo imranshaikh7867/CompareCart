@@ -11,6 +11,7 @@ const categories = [
   { id: 'Shoe for Men', name: 'Shoe for Men', icon: '📱' },
   { id: 'Shoe for Women', name: 'Shoe for Women', icon: '💻' },
   { id: 'Shoe for Men (Casual)', name: 'Shoe for Men (Casual)', icon: '🎧' },
+  { id: 'Shoe for Men (Loafer)', name: 'Shoe for Men (Loafer)', icon: '🎧' },
   { id: 'Shoe for Men (Formal)', name: 'Shoe for Men (Formal)', icon: '📷' },
   { id: 'Shoe for Men (Leather)', name: 'Shoe for Men (Leather)', icon: '📺' },
 ];
